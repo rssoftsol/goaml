@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>New user</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>User name</mat-label>
+    <input matInput [(ngModel)]="username">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>First name</mat-label>
+    <input matInput [(ngModel)]="firstName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Last name</mat-label>
+    <input matInput [(ngModel)]="lastName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput [(ngModel)]="password" type="password">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Role</mat-label>
+    <input matInput [(ngModel)]="role">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="add()" cdkFocusInitial>Add</button>
+</div>

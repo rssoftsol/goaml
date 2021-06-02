@@ -1,0 +1,12 @@
+<header *ngIf="loginService.isUserLoggedIn()">
+  <nav class ="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-brand">Welcome Shekhar!!</div>
+    <ul class="navbar-nav text-right">
+      <li *ngIf="'admin' == 'user'"><a routerLink="/" class="nav-link">Download xml</a></li>
+      <li *ngIf="'admin' == 'admin'"><a routerLink="/users" class="nav-link">Users</a></li>
+      <li><a routerLink="/change-password" class="nav-link">Change Password</a></li>
+      <li><a routerLink="/logout" class="nav-link">Logout</a></li>
+    </ul>
+  </nav>
+</header>
+
