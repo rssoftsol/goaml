@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {User, UsersService} from "../service/users.service";
-import {ConfirmDialogueComponent} from "../confirm-dialogue/confirm-dialogue.component";
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {EditUserDialogueComponent} from "../edit-user-dialogue/edit-user-dialogue.component";
-import {CreateUserDialogueComponent} from "../create-user-dialogue/create-user-dialogue.component";
+import {Component, OnInit} from '@angular/core';
+import {User, UsersService} from '../service/users.service';
+import {ConfirmDialogueComponent} from '../confirm-dialogue/confirm-dialogue.component';
+import {MatDialog} from '@angular/material/dialog';
+import {EditUserDialogueComponent} from '../edit-user-dialogue/edit-user-dialogue.component';
+import {CreateUserDialogueComponent} from '../create-user-dialogue/create-user-dialogue.component';
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -11,11 +12,13 @@ import {CreateUserDialogueComponent} from "../create-user-dialogue/create-user-d
 })
 export class UsersComponent implements OnInit {
 
-  dataSource : User[];
+  dataSource: User[];
   displayedColumns: string[] = ['emailId', 'firstName', 'lastName', 'role', 'action'];
-  constructor(private userService : UsersService, private dialog: MatDialog) { }
 
-  openConfirmDialog(user : User): void {
+  constructor(private userService: UsersService, private dialog: MatDialog) {
+  }
+
+  openConfirmDialog(user: User): void {
     const dialogRef = this.dialog.open(ConfirmDialogueComponent, {
       width: '250px',
       data: user
@@ -25,17 +28,17 @@ export class UsersComponent implements OnInit {
       console.log('The dialog was closed');
       if (result) {
         this.userService.deleteUser(result.emailId).subscribe(value => {
-          this.userService.getUsers().subscribe(value => {
-            this.dataSource = value;
+          this.userService.getUsers().subscribe(users => {
+            this.dataSource = users;
           });
         });
       }
     });
   }
 
-  openEditDialog(user : User): void {
+  openEditDialog(user: User): void {
     console.log('user:::');
-    console.log(user)
+    console.log(user);
     const dialogRef = this.dialog.open(EditUserDialogueComponent, {
       width: '250px',
       data: user

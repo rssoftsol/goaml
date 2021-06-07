@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 export class User {
   constructor(
@@ -17,29 +18,25 @@ export class User {
 })
 export class UsersService {
 
-  private users : User[] = [];
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  public getUsers() {
-    return this.http.get<User[]>("http://localhost:8081/users");
+  public getUsers(): Observable<User[]> {
+    return this.http.get<User[]>('http://localhost:8081/users');
   }
 
-  public getUser(emailId : string) {
+  public getUser(emailId: string): Observable<User> {
     return this.http.get<User>(`http://localhost:8081/users/${emailId}`);
   }
 
-  public addUser(user : User) {
-    console.log('Adding user')
-    return this.http.post("http://localhost:8081/users", user);
-    console.log(this.users)
+  public addUser(user: User): Observable<any> {
+    return this.http.post('http://localhost:8081/users', user);
   }
 
-  public deleteUser(emailId : string) {
+  public deleteUser(emailId: string): Observable<any> {
     return this.http.delete(`http://localhost:8081/users/${emailId}`);
   }
 
-  public updateUser(user : User) {
-    return this.http.put<User>("http://localhost:8081/users", user);
+  public updateUser(user: User): Observable<User> {
+    return this.http.put<User>('http://localhost:8081/users', user);
   }
 }

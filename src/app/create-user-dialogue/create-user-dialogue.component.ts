@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {MatDialogRef} from "@angular/material/dialog";
-import {User, UsersService} from "../service/users.service";
+import {MatDialogRef} from '@angular/material/dialog';
+import {User, UsersService} from '../service/users.service';
 
 @Component({
   selector: 'app-create-user-dialogue',
@@ -16,7 +16,8 @@ export class CreateUserDialogueComponent {
 
   constructor(
     public dialogRef: MatDialogRef<CreateUserDialogueComponent>,
-    private userService : UsersService) {}
+    private userService: UsersService) {
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

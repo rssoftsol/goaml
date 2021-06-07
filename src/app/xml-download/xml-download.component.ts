@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
-import {ReportService} from "../service/report.service";
+import {ReportService} from '../service/report.service';
 import { saveAs } from 'file-saver';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
 
+const moment = _moment;
 @Component({
   selector: 'app-xml-download',
   templateUrl: './xml-download.component.html',
@@ -11,23 +14,33 @@ import { saveAs } from 'file-saver';
 export class XmlDownloadComponent implements OnInit {
 
   range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
+    start: new FormControl(moment()),
+    end: new FormControl(moment())
   });
+
+  valid = true;
+  message: string;
 
   constructor(private reportService: ReportService) { }
 
   ngOnInit(): void {
   }
 
-  downloadXML() {
-    this.reportService.getReport(this.range.get('start').value, this.range.get('end').value)
+  downloadXML(): void {
+    console.log('start date');
+    console.log(this.range.get('start').value);
+    const from = this.range.get('start').value.format('YYYY-MM-DD');
+    const to = this.range.get('end').value.format('YYYY-MM-DD');
+    this.reportService.getReport(from, to)
       .subscribe(value => {
-        console.log('<==========value============>')
-        console.log(value)
-        var blob = new Blob(["value.text()"], { type: '' });
-        saveAs(blob, 'fileName.xml');
-      })
+        this.valid = true;
+        const blob = new Blob([value], { type: '' });
+        saveAs(blob, 'go_aml_' + from + '_' + to + '.xml');
+      }, error => {
+        this.valid = false;
+        this.message = error.status === 404 ? 'No transactions found' : 'Error Occurred, Try again';
+        console.log(error);
+      });
   }
 
 }

@@ -3,3 +3,10 @@ table {
 }
 
 
+.verticalLine {
+  border-left: thick solid #ff0000;
+}
+
+.action {
+  cursor: pointer;
+}

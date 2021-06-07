@@ -7,7 +7,7 @@ import { AuthenticationService } from '../service/authentication.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   username = ''
   password = ''
@@ -16,15 +16,14 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,
               private loginService: AuthenticationService) { }
 
-  ngOnInit() {
-  }
-
-  checkLogin() {
+  checkLogin(): void {
     this.loginService.authenticate(this.username, this.password)
       .subscribe(data => {
       if (data) {
         sessionStorage.setItem('username', data.emailId);
-        if (data.role == 'user') {
+        sessionStorage.setItem('role', data.role);
+        sessionStorage.setItem('name', data.firstName);
+        if (data.role === 'user') {
           this.router.navigate([''])
         } else {
           this.router.navigate(['users'])

@@ -1,11 +1,11 @@
-<form class="form-signin text-center">
-  <!--<img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
-  <h1>GO AML</h1>
-  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-  <label for="username" class="sr-only">User name</label>
-  <input type="text" name="username" class="form-control" [(ngModel)]="username" id="username" placeholder="User name" required autofocus>
-  <label for="password" class="sr-only">Password</label>
-  <input type="password" name="password" id="password" class="form-control" placeholder="Password" [(ngModel)]="password" required>
-  <button class="btn btn-lg btn-primary btn-block" (click)=checkLogin()>Sign in</button>
-  <div *ngIf="invalidLogin" class="mat-error">Invalid username or password</div>
-</form>
+<div style="background: white"><img src="assets/goAML.jpeg" width="200" height="200"/></div>
+    <form class="form-signin text-center">
+      <!--<img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
+      <h1 class="h3 mb-3 font-weight-normal" style="color: white">Please sign in</h1>
+      <label for="username" class="sr-only">User name</label>
+      <input type="text" name="username" class="form-control" [(ngModel)]="username" id="username" placeholder="User name" required autofocus>
+      <label for="password" class="sr-only">Password</label>
+      <input type="password" name="password" id="password" class="form-control" placeholder="Password" [(ngModel)]="password" required>
+      <button class="btn btn-lg btn-primary btn-block" (click)=checkLogin()>Sign in</button>
+      <div *ngIf="invalidLogin" class="mat-error">Invalid username or password</div>
+    </form>
