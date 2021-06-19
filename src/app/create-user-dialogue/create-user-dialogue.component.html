@@ -16,9 +16,12 @@
     <mat-label>Password</mat-label>
     <input matInput [(ngModel)]="password" type="password">
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field appearance="fill">
     <mat-label>Role</mat-label>
-    <input matInput [(ngModel)]="role">
+    <mat-select [(value)]="role">
+      <mat-option value="user">User</mat-option>
+      <mat-option value="admin">Admin</mat-option>
+    </mat-select>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>

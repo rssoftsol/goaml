@@ -5,14 +5,15 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li *ngIf="getRole() == 'user'"><a routerLink="/" class="nav-link"
+      <li><a routerLink="/" class="nav-link"
                                          routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Download xml</a></li>
       <li *ngIf="getRole() == 'admin'"><a routerLink="/users" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
                                           class="nav-link">Users</a></li>
       <li><a routerLink="/change-password" routerLinkActive="active" class="nav-link">Change Password</a></li>
     </ul>
     <span class="my-2 my-lg-0">
-      <a routerLink="/logout" routerLinkActive="active" class="nav-link text-right">Logout</a>
+      <a routerLink="/logout" class="nav-link text-right"><mat-icon>exit_to_app</mat-icon></a>
+
     </span>
   </div>
 </nav>

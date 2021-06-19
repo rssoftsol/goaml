@@ -3,6 +3,8 @@ import {FormGroup, FormControl} from '@angular/forms';
 import {ReportService} from '../service/report.service';
 import { saveAs } from 'file-saver';
 import * as _moment from 'moment';
+import { validator } from 'xsd-schema-validator';
+
 // tslint:disable-next-line:no-duplicate-imports
 
 const moment = _moment;
@@ -19,7 +21,8 @@ export class XmlDownloadComponent implements OnInit {
   });
 
   valid = true;
-  message: string;
+  downloading: boolean;
+  messages: string[];
 
   constructor(private reportService: ReportService) { }
 
@@ -27,19 +30,30 @@ export class XmlDownloadComponent implements OnInit {
   }
 
   downloadXML(): void {
+    this.valid = true;
+    this.downloading = true;
     console.log('start date');
     console.log(this.range.get('start').value);
     const from = this.range.get('start').value.format('YYYY-MM-DD');
     const to = this.range.get('end').value.format('YYYY-MM-DD');
     this.reportService.getReport(from, to)
-      .subscribe(value => {
-        this.valid = true;
-        const blob = new Blob([value], { type: '' });
+      .subscribe(data => {
+        /*validator.validateXML(value, 'resources/foo.xsd', (err, result) => {
+          if (err) {
+            throw err;
+          }
+          result.valid; // true
+        });*/
+        this.valid = false;
+        this.messages = data.errorMessages;
+        const blob = new Blob([data.report], { type: '' });
         saveAs(blob, 'go_aml_' + from + '_' + to + '.xml');
+        this.downloading = false;
       }, error => {
         this.valid = false;
-        this.message = error.status === 404 ? 'No transactions found' : 'Error Occurred, Try again';
+        this.messages = [error.status === 404 ? 'No transactions found' : 'Error Occurred, Try again'];
         console.log(error);
+        this.downloading = false;
       });
   }
 

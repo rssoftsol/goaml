@@ -4,9 +4,17 @@ table {
 
 
 .verticalLine {
-  border-left: thick solid #ff0000;
+  border-left: 3px solid black;
 }
 
 .action {
   cursor: pointer;
+}
+
+.green-icon {
+  color: green;
+}
+
+.red-icon {
+  color: red;
 }
